@@ -15,7 +15,7 @@ export const metadata = {
 
 const TopNav: React.FC = () => {
   return (
-    <nav className="flex w-full items-center justify-between p-4 text-white">
+    <nav className="flex w-full items-center justify-between border-b p-4 text-white">
       <div>FlexFolio</div>
       <div>Sign In</div>
     </nav>

@@ -7,7 +7,13 @@ export default async function HomePage() {
 
   return (
     <main className="flex flex-col items-center justify-center text-white">
-      <div>FlexFolio</div>
+      <div className="flex w-full flex-wrap gap-4 p-4">
+        {posts.map((post) => (
+          <div key={post.id}>{post.name}</div>
+        ))}
+      </div>
+
+      {/* <div>FlexFolio</div> */}
     </main>
   );
 }
