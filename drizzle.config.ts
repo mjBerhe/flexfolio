@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     connectionString: env.POSTGRES_URL,
   },
-  tablesFilter: ["gaingraph_*"],
+  tablesFilter: ["flexfolio_*"],
 } satisfies Config;

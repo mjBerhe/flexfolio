@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { db } from "~/server/db";
+import { getMyPosts } from "~/server/queries";
 
 // every db change updates this page
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const posts = await db.query.posts.findMany();
+  const posts = await getMyPosts();
   console.log(posts);
 
   return (
