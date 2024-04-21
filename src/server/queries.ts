@@ -7,7 +7,9 @@ import { redirect } from "next/navigation";
 export async function getMyWorkouts() {
   const user = auth();
 
-  if (!user.userId) throw new Error("Unauthorized");
+  if (!user.userId) {
+    return [];
+  }
 
   const workouts = await db.query.workouts.findMany({
     where: (model, { eq }) => eq(model.userId, user.userId),
