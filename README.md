@@ -5,8 +5,10 @@
 - [x] Make it deploy (vercel)
 - [x] Make basic ui
 - [x] Set up a database
-- [] Attach database to UI (Vercel postgres)
-- [] Add authentication (Clerk)
+- [x] Attach database to UI (Vercel postgres)
+- [x] Add authentication (Clerk)
+- [] Calendar UI
+- [] Add workout UI
 - [] Add Create/Edit/Delete functions (Server actions)
 - [] Error Management (Sentry)
 - [] Routing? (Parallel route)

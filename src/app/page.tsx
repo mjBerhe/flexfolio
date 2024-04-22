@@ -3,13 +3,14 @@ import { db } from "~/server/db";
 import { getMyWorkouts, createWorkout } from "~/server/queries";
 
 import { Button } from "./_components/ui/button";
+import { Calendar } from "./_components/calendar";
 
 // every db change updates this page
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const workouts = await getMyWorkouts();
-  console.log(workouts);
+  // console.log(workouts);
 
   return (
     <main className="flex flex-col items-center justify-center text-white">
@@ -35,6 +36,8 @@ export default async function HomePage() {
           <Button variant={"default"}>Create Workout</Button>
         </form>
       </div>
+
+      <Calendar />
 
       {/* <div>FlexFolio</div> */}
     </main>
