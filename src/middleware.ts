@@ -8,7 +8,7 @@ export default clerkMiddleware((auth, req) => {
   if (isAdminRoute(req)) auth().protect({ role: "org:admin" });
 
   // Restrict dashboard routes to signed in users
-  if (isDashboardRoute(req)) auth().protect();
+  // if (isDashboardRoute(req)) auth().protect();
 });
 
 export const config = {

@@ -64,7 +64,7 @@ export const Calendar: React.FC = () => {
       <div className={cn("mt-8 w-full gap-x-8")}>
         <div
           className={cn(
-            "grid w-full grid-cols-7 rounded-t-lg border-l-[1px] border-t-[1px] bg-dark-200/80 shadow-lg transition-all duration-1000",
+            "grid w-full grid-cols-7 rounded-t-lg border-l-[1px] border-t-[1px] bg-dark-200/80 shadow-lg",
             rowAmount === 5
               ? "grid-rows-[repeat(5,_1fr)]"
               : "grid-rows-[repeat(6,_1fr)]",
@@ -77,7 +77,7 @@ export const Calendar: React.FC = () => {
               <div
                 key={i}
                 className={cn(
-                  "flex flex-col items-center border-b-[1px] border-r-[1px] p-3",
+                  "flex h-[100px] w-[100px] flex-col items-center border-b-[1px] border-r-[1px] p-3",
                   borderColor,
                 )}
               >
@@ -86,22 +86,21 @@ export const Calendar: React.FC = () => {
                 </span>
               </div>
             ))}
-          {currentDaysOfMonth.map((day, i) => (
-            <div key={day.date()}>{day.date()}</div>
-            // <CalendarDay
-            //   key={day.date()}
-            //   day={day}
-            //   index={i}
-            //   emptyDays={emptyDays}
-            //   selectDay={handleSelectDay}
-            //   selectWorkout={handleOpenWorkout}
-            //   isSelected={selectedDay ? isSameDay(selectedDay, day) : false}
-            //   isCondensed={showAddWorkout || showEditWorkout}
-            //   selectedWorkout={selectedWorkout}
-            //   workouts={currentWorkouts?.filter((x) =>
-            //     isSameDay(dayjs(x.date), day),
-            //   )}
-            // />
+          {currentDaysOfMonth.map((day, index) => (
+            <div
+              key={day.date()}
+              className={cn(
+                "flex flex-col items-center border-b-[1px] border-r-[1px] border-card p-3",
+                emptyDays + index === 6 && "rounded-tr-lg",
+              )}
+            >
+              <span className="font-semibold text-primary-600">
+                {day.date() < 8 - emptyDays && DAYS_OF_WEEK_SHORT[day.day()]}
+              </span>
+              <div className="mt-1 cursor-pointer text-slate-300">
+                {day.date()}
+              </div>
+            </div>
           ))}
           {Array(fillerDays)
             .fill(null)

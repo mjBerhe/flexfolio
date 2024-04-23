@@ -21,9 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="en">
-        <body className={`font-sans ${inter.variable}`}>
+        <body
+          className={`font-sans ${inter.variable} flex min-h-screen flex-col`}
+        >
           <TopNav />
           {children}
         </body>
