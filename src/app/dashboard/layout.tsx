@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "FlexFolio Dashboard",
   description: "flex your folio at flexflexio",
@@ -11,8 +13,17 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex flex-grow text-white">
-      <div className="flex border p-3">Sidebar here</div>
+      <SideBar />
       <div>{children}</div>
     </div>
   );
 }
+
+const SideBar: React.FC = () => {
+  return (
+    <div className="flex flex-col gap-3 border p-3">
+      <Link href={"/dashboard"}>Calendar</Link>
+      <Link href={"/dashboard/workouts"}>Workouts</Link>
+    </div>
+  );
+};

@@ -8,12 +8,11 @@ export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const workouts = await getMyWorkouts();
-  // console.log(workouts);
 
   return (
     <main className="flex w-full flex-grow flex-col text-white">
       <div className="flex flex-col">
-        <div className="flex w-full flex-wrap gap-4 p-4">
+        {/* <div className="flex w-full flex-wrap gap-4 p-4">
           {workouts.map((workout) => (
             <div key={workout.id}>{workout.name}</div>
           ))}
@@ -34,9 +33,11 @@ export default async function DashboardPage() {
           >
             <Button variant={"default"}>Create Workout</Button>
           </form>
-        </div>
+        </div> */}
 
-        <Calendar />
+        <div className="flex">
+          <Calendar />
+        </div>
       </div>
     </main>
   );
