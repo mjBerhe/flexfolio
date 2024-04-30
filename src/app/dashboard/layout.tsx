@@ -12,9 +12,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-grow text-white">
-      <SideBar />
-      <div>{children}</div>
+    <div className="flex w-full flex-grow text-white">
+      {/* <SideBar /> */}
+      <div className="mx-auto w-full max-w-7xl px-4">{children}</div>
     </div>
   );
 }

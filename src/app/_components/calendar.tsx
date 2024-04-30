@@ -16,6 +16,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { isSameDay, getDaysOfMonth, cn } from "../lib/utils";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { SelectExercise } from "./selectExercise";
 
 const MONTH_TO_NAME = [
   "January",
@@ -134,7 +136,12 @@ export const Calendar: React.FC = () => {
               <span className="font-semibold text-primary-600">
                 {day.date() < 8 - emptyDays && DAYS_OF_WEEK_SHORT[day.day()]}
               </span>
-              <div className="mt-1 cursor-pointer text-slate-300">
+              <div
+                className={cn(
+                  "mt-1 cursor-pointer text-slate-300",
+                  isSameDay(day, currentDay) ? "text-primary-600" : "",
+                )}
+              >
                 {day.date()}
               </div>
             </div>
@@ -153,12 +160,27 @@ export const Calendar: React.FC = () => {
         </div>
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogContent className="text-white">
+          <DialogContent className="border-card bg-dark-100 text-white">
             <DialogHeader>
-              <DialogTitle>Add Workout</DialogTitle>
-              <DialogDescription>
-                {selectedDay ? selectedDay.date() : "hello"}
-              </DialogDescription>
+              <div className="">
+                <Input
+                  placeholder="Enter Workout Name"
+                  className={cn(
+                    "h-auto border-none bg-transparent p-0 outline-none focus:border-none focus:outline-none",
+                    "w-[250px] text-xl font-normal text-white",
+                  )}
+                />
+              </div>
+
+              <div className="mt-1 flex flex-col">
+                <span className="text-primary-600">
+                  {selectedDay ? selectedDay.format("MMMM DD, YYYY") : "hello"}
+                </span>
+                <SelectExercise />
+                <div className="mt-3 w-full border text-center">
+                  Add Exercises
+                </div>
+              </div>
             </DialogHeader>
           </DialogContent>
         </Dialog>
