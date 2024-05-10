@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Plus } from "lucide-react";
 
 export const metadata = {
   title: "FlexFolio Dashboard",
@@ -13,15 +14,19 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex w-full flex-grow text-white">
-      {/* <SideBar /> */}
-      <div className="mx-auto w-full max-w-7xl px-4">{children}</div>
+      <SideBar />
+      {/* <div className="mx-auto w-full max-w-7xl px-4">{children}</div> */}
+      <div className="mx-4 my-3 flex w-full">{children}</div>
     </div>
   );
 }
 
 const SideBar: React.FC = () => {
   return (
-    <div className="flex flex-col gap-3 border p-3">
+    <div className="flex min-w-[200px] flex-col gap-3 bg-dark-200 px-5 pt-5">
+      <Link href="/dashboard/new">
+        <Plus />
+      </Link>
       <Link href={"/dashboard"}>Calendar</Link>
       <Link href={"/dashboard/workouts"}>Workouts</Link>
     </div>
