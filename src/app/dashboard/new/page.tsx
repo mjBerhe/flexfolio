@@ -10,16 +10,34 @@ import { Button } from "../../_components/ui/button";
 const today = dayjs();
 
 export default function NewWorkoutPage() {
+  const [selectedDay, setSelectedDay] = useState<dayjs.Dayjs>(today);
+  const [isAddingExercise, setIsAddingExercise] = useState<boolean>(false);
+
   return (
-    <div className="flex h-full w-full min-w-[600px] flex-grow rounded-lg bg-dark-200">
-      <div>
+    <div className="flex h-full w-full min-w-[600px] flex-grow rounded-lg bg-dark-200 px-8">
+      <div className="mt-8 flex w-full max-w-full flex-col overflow-hidden">
         <Input
           placeholder="Enter Workout Name"
           className={cn(
             "h-auto border-none bg-transparent p-0 outline-none focus:border-none focus:outline-none",
-            "w-[250px] text-xl font-normal text-white",
+            "w-full text-3xl font-bold text-white",
           )}
         />
+
+        <div className="mt-1">
+          <span className=" text-primary-500">
+            {selectedDay ? selectedDay.format("MMMM DD, YYYY") : "hello"}
+          </span>
+        </div>
+
+        <div className="mt-8 flex w-full items-center justify-center">
+          <div
+            className="flex h-[70px] w-[150px] cursor-pointer items-center justify-center border"
+            onClick={() => setIsAddingExercise(true)}
+          >
+            <span>Add Exercise</span>
+          </div>
+        </div>
       </div>
     </div>
   );
