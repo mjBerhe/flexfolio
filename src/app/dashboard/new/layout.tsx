@@ -9,9 +9,5 @@ export default function NewWorkoutLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex flex-grow text-white">
-      <div>{children}</div>
-    </div>
-  );
+  return <div className="flex w-full flex-grow text-white">{children}</div>;
 }

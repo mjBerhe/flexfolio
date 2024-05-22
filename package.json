@@ -23,6 +23,7 @@
     "cmdk": "^1.0.0",
     "dayjs": "^1.11.10",
     "drizzle-orm": "^0.29.4",
+    "fuzzysort": "^3.0.1",
     "lucide-react": "^0.373.0",
     "next": "^14.2.1",
     "postgres": "^3.4.3",

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
+import fuzzysort from "fuzzysort";
 
 import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
@@ -19,13 +20,21 @@ import { exercises } from "../const/exercises";
 
 const exerciseOptions = exercises
   .filter((x) => x.category === "strength")
-  .map((y) => ({ name: y.name, value: y.name }));
+  .map((x) => x.name);
+// .map((y) => ({ name: y.name, value: y.name }));
 
-export const SelectExercise = () => {
+export const SelectExercise = (props: { className?: string }) => {
+  const { className } = props;
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
 
-  console.log(value);
+  const filteredOptions =
+    query === ""
+      ? exerciseOptions.slice(0, 100)
+      : fuzzysort
+          .go(query, [...exerciseOptions], { limit: 50 })
+          .map((x) => x.target);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -34,28 +43,35 @@ export const SelectExercise = () => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className="w-full justify-between border-dark-400 text-gray-300"
         >
           {value
-            ? exerciseOptions?.find((exercise) => exercise.value === value)
-                ?.value
+            ? filteredOptions?.find((exercise) => exercise === value)
             : "Select exercise..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className=" z-[100] w-full border-card bg-dark-200 p-0">
+      <PopoverContent
+        className={cn(
+          "z-[100] max-h-[400px] overflow-y-scroll border-card bg-dark-200 p-0",
+          className,
+        )}
+      >
         <Command className="text-white">
-          <CommandInput placeholder="Search exercise..." />
+          <CommandInput
+            value={query}
+            onInput={(e) => setQuery(e.currentTarget.value)}
+            placeholder="Search exercise..."
+          />
 
           <CommandEmpty>No exercise found.</CommandEmpty>
           <CommandGroup>
             <CommandList>
-              {exerciseOptions?.map((exercise) => (
+              {filteredOptions?.map((exercise) => (
                 <CommandItem
-                  key={exercise.value}
-                  value={exercise.value}
+                  key={exercise}
+                  value={exercise}
                   onSelect={(currentValue) => {
-                    console.log(currentValue);
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
@@ -64,10 +80,10 @@ export const SelectExercise = () => {
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === exercise.value ? "opacity-100" : "opacity-0",
+                      value === exercise ? "opacity-100" : "opacity-0",
                     )}
                   />
-                  {exercise.name}
+                  {exercise}
                 </CommandItem>
               ))}
             </CommandList>
